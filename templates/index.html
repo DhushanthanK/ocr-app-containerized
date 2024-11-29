@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Upload PDF</title>
+  </head>
+  <body>
+    <h1>Upload PDF</h1>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+      <input type="file" name="file">
+      <input type="submit" value="Upload">
+    </form>
+  </body>
+</html>

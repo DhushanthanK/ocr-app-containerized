@@ -1,0 +1,19 @@
+{
+    "page_1": {
+        "Bank Statements": {
+            "matched_keywords": [
+                "Bank"
+            ],
+            "average_score": 100.0
+        }
+    },
+    "page_2": {},
+    "page_3": {
+        "Bank Statements": {
+            "matched_keywords": [
+                "Bank"
+            ],
+            "average_score": 100.0
+        }
+    }
+}
