@@ -1,8 +1,9 @@
+albumentations>=1.0.0
 PyMuPDF
 torch
 torchvision
 torchaudio
-paddlepaddle
+paddlepaddle>=2.6.0.3
 paddleocr
 premailer
 transformers
@@ -15,7 +16,9 @@ opencv-python-headless
 pytesseract
 pandas
 fuzzywuzzy
-spacy
+spacy==3.5.0
 pytest
 flask-cors
 gunicorn
+cymem==2.0.7
+blis==0.7.9

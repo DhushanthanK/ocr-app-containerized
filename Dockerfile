@@ -1,31 +1,42 @@
-# Use an official Ubuntu base image
-FROM ubuntu:latest
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim
 
 # Update and install dependencies
-RUN apt-get update && \
-    apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-dev \
-    python3-venv \
-    git \
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    libgomp1 \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    libleptonica-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libgl1-mesa-glx \
+    libgl1 \
+    ffmpeg \
+    poppler-utils \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
+    
+# Set the working directory in the container
+WORKDIR /app
 
-# Set the working directory inside the container
-WORKDIR /home/app
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Copy the application code into the container
-COPY . /home/app
+RUN python -m venv /opt/venv
+# Enable venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-# Create and activate the virtual environment
-RUN python3 -m venv myenv
+# Install Python dependencies
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install the required Python packages inside the virtual environment
-RUN /home/app/myenv/bin/pip install --upgrade pip && \
-    /home/app/myenv/bin/pip install -r /home/app/requirements.txt
-
-# Expose the port that the app will run on
+# Expose port 5000 for Flask
 EXPOSE 5000
 
-# Command to run the application
-CMD ["bash", "-c", "source /home/app/myenv/bin/activate && python3 app.py"]
+# Command to run the Flask app
+CMD ["python", "app.py"]
